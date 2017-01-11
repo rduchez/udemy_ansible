@@ -1,4 +1,12 @@
-# Inventory
-192.168.155.27
-192.168.155.28
-192.168.155.29
+[loadbalancer]
+lb01
+
+[webserver]
+app01
+app02
+
+[database]
+db01
+
+[control]
+control
