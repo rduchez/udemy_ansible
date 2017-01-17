@@ -1,0 +1,14 @@
+---
+  - hosts: webserver
+    become: true
+    tasks:
+      - name: install web components
+        apt: name={{item}} state=present update_cache=yes
+        with_items:
+          - apache2
+          - python-pip
+          - python-virtualenv
+
+
+      - name: ensure apache2 is running
+        service: name=apache2 state=started enabled=yes
