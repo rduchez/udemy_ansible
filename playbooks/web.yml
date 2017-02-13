@@ -9,6 +9,7 @@
           - libapache2-mod-wsgi
           - python-pip
           - python-virtualenv
+          - python-mysqldb
 
 
       - name: ensure apache2 is running
@@ -30,6 +31,13 @@
         pip: requirements=/var/www/demo/requirements.txt virtualenv=/var/www/demo/.venv
         notify: restart apache2
 
+      - name: de-activate default
+        file: path=/etc/apache2/sites-enabled/000-default.conf state=absent
+        notify: restart apache2
+
+      - name: activate new site
+        file: src=/etc/apache2/sites-available/demo.conf dest=/etc/apache2/sites-enabled/demo.conf state=link
+        notify: restart apache2
 
     handlers:
       - name: restart apache2
