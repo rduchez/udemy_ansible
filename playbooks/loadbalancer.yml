@@ -5,6 +5,11 @@
       - name: install nginx
         apt: name=nginx state=present update_cache=yes
 
+      - name: install tools
+        apt: name={{item}} state=present update_cache=yes
+        with_items:
+          - python-httplib2
+
       - name: ensure nginx is running
         service: name=nginx state=started enabled=yes
 
